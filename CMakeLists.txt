@@ -3,4 +3,8 @@ project(Assignment4GarrisonCreek)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(src)
+# Add the executable
+add_executable(Hash src/main.cpp src/HashEntry/HashEntry.cpp src/HashMap/HashMap.cpp)
+
+# Add include directories
+target_include_directories(Hash PRIVATE src/HashEntry src/HashMap)

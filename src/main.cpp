@@ -1,7 +1,6 @@
 #include <iostream>
-#include "HashMap/HashMap.h"
+#include "HashMap/HashMap.cpp"
 using namespace std; // TODO: remove this line
-
 int main(){
     HashMap<int> hm;
     int x = 3, y = 23;  // TESTING PURPOSES 

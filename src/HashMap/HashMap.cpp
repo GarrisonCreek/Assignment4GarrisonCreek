@@ -3,8 +3,8 @@
 //
 
 #include "HashMap.h"
-const int TABLE_SIZE = 128;
 
+const int TABLE_SIZE = 128;
 
 template <class T>
 HashMap<T>::HashMap() {
