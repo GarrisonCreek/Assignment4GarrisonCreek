@@ -1,5 +1,5 @@
 #include <iostream>
-#include "HashMap.h"
+#include "HashMap/HashMap.h"
 using namespace std; // TODO: remove this line
 
 int main(){

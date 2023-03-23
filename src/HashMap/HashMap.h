@@ -5,7 +5,7 @@
 #ifndef ASSIGNMENT4GARRISONCREEK_HASHMAP_H
 #define ASSIGNMENT4GARRISONCREEK_HASHMAP_H
 
-#include "HashEntry.h"
+#include "../HashEntry/HashEntry.h"
 
 template<class T>
 class HashMap {
