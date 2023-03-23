@@ -1,9 +1,7 @@
 add_executable(
         HashEntry
         HashEntry/HashEntry.cpp
-        HashEntry/HashEntry.h
         HashMap
         HashMap/HashMap.cpp
-        HashMap/HashMap.h
         main.cpp
 )
