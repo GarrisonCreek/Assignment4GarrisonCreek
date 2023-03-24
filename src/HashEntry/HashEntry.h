@@ -6,12 +6,13 @@
 #define ASSIGNMENT4GARRISONCREEK_HASHENTRY_H
 
 #include <optional>
+#include "../Sequence/Sequence.h"
 
 template<class T>
 class HashEntry {
 private:
     T key;
-    T value;
+    Sequence<T> value;
 public:
 
     /**
@@ -21,7 +22,7 @@ public:
      * @param key
      * @param value
      */
-    HashEntry(T key, T value);
+    HashEntry(T key, Sequence<T> value);
 
     /**
      * Description: Returns the key
@@ -33,7 +34,7 @@ public:
      * Description: Returns the value
      * @return value
      */
-    T getValue();
+    Sequence<T> getValue();
 
 };
 

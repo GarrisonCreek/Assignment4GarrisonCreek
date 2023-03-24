@@ -4,18 +4,18 @@
 
 #include "HashEntry.h"
 
-template <class T>
-HashEntry<T>::HashEntry(T key, T value) {
+template<class T>
+HashEntry<T>::HashEntry(T key, Sequence<T> value) {
     this->key = key;
     this->value = value;
 }
 
-template <class T>
+template<class T>
 T HashEntry<T>::getKey() {
     return key;
 }
 
-template <class T>
-T HashEntry<T>::getValue() {
+template<class T>
+Sequence<T> HashEntry<T>::getValue() {
     return value;
 }
