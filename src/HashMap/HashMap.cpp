@@ -4,28 +4,30 @@
 
 #include "HashMap.h"
 
-const int MAP_SIZE = 128;
-
-template<class T>
-HashMap<T>::HashMap() {
-    map = new HashEntry<T> *[MAP_SIZE];
+template<class K, class V>
+HashMap<K,V>::HashMap() {
+    map = new HashEntry<K,V> *[MAP_SIZE];
     for (int i = 0; i < MAP_SIZE; i++) {
-        map[i] = NULL;
+        map[i] = nullptr;
     }
+
 }
 
-template<class T>
-HashMap<T>::~HashMap() {
+template<class K, class V>
+HashMap<K, V>::~HashMap() {
     for (int i = 0; i < MAP_SIZE; i++) {
-        if (map[i] != NULL) {
-            delete map[i];
+        HashEntry<K, V>* entry = map[i];
+        while (entry != nullptr) {
+            HashEntry<K, V>* prev = entry;
+            entry = entry->getNext();
+            delete prev;
         }
     }
     delete[] map;
 }
 
-template<class T>
-T HashMap<T>::get(T key) {
+template<class K, class V>
+V HashMap<K,V>::get(K key) {
     int hash = (key % MAP_SIZE);
     while (map[hash] != NULL && map[hash]->getKey() != key)
         hash = (hash + 1) % MAP_SIZE;
@@ -36,14 +38,31 @@ T HashMap<T>::get(T key) {
     }
 }
 
-template<class T>
-void HashMap<T>::put(T key, T value) {
-    int hash = (key % MAP_SIZE);
-    while (map[hash] != NULL && map[hash]->getKey() != key) {
-        hash = (hash + 1) % MAP_SIZE;
+template<class K, class V>
+void HashMap<K,V>::put(K key, V value) {
+    int hash = (key % MAP_SIZE); // make a hash function
+    auto *newEntry = new HashEntry<K,V>(key, value, nullptr);
+    if(map[hash] == nullptr) {
+        map[hash] = newEntry;
+    } else {
+        HashEntry<K,V> *previous = nullptr;
+        HashEntry<K,V> *current = map[hash];
+
+        while(current != nullptr) {
+            if(current->getKey() == key) {
+                if(previous == nullptr) {
+                    newEntry->getNext() = current->getNext();
+                    map[hash] = newEntry;
+                    return;
+                } else {
+                    newEntry->getNext() = current->getNext();
+                    previous->getNext() = newEntry;
+                    return;
+                }
+            }
+            previous = current;
+            current = current->getNext();
+        }
+        previous->getNext() = newEntry;
     }
-    if (map[hash] != NULL) {
-        delete map[hash];
-    }
-    map[hash] = new HashEntry(key, value);
 }

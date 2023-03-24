@@ -7,25 +7,27 @@
 
 #include "../HashEntry/HashEntry.h"
 
-template<class T>
+template<class K, class V>
 class HashMap {
 private:
-    HashEntry<T> **map;
+    HashEntry<K,V> **map;
+    const int MAP_SIZE = 128; // TODO: Change this completely
+
 public:
 
     HashMap();
 
     ~HashMap();
 
-    T get(T key);
+    V get(K key);
 
-    void put(T key, T value);
+    void put(K key, V value);
 
     // TODO: Implement the following methods, remove, and clear, maybe an add im not sure
 
 //    void remove(T &key);
 
-//    void output();
+//    void display();
 
 };
 

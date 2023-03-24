@@ -8,13 +8,14 @@
 #include <optional>
 #include "../Sequence/Sequence.h"
 
-template<class T>
+template<class K, class V>
 class HashEntry {
 private:
-    T key;
-    Sequence<T> value;
-public:
+    K key;
+    V value;
+    HashEntry<K, V> *next;
 
+public:
     /**
      * Description: Constructor that initializes all attributes of this class.
      * replaces self
@@ -22,19 +23,25 @@ public:
      * @param key
      * @param value
      */
-    HashEntry(T key, Sequence<T> value);
+    HashEntry(K key, V value, HashEntry<K, V> *next);
 
     /**
      * Description: Returns the key
      * @return key
      */
-    T getKey();
+    K getKey();
 
     /**
      * Description: Returns the value
      * @return value
      */
-    Sequence<T> getValue();
+    V getValue();
+
+    /**
+     * Description: Returns the next HashEntry
+     * @return next
+     */
+    HashEntry<K, V> *&getNext();
 
 };
 
