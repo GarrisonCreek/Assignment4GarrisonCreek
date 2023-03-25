@@ -4,6 +4,7 @@
 
 #include <iostream>
 #include "HashMap.h"
+#include "../Sequence/Sequence.hpp"
 
 template<class K, class V>
 HashMap<K, V>::HashMap() {
@@ -28,7 +29,6 @@ HashMap<K, V>::~HashMap() {
 
 template<class K, class V>
 V HashMap<K, V>::get(K key) {
-//    int hashCode = (key % MAP_SIZE);
     int hash = hashCode(key);
     if (map[hash] == nullptr) {
         return V();
@@ -46,7 +46,6 @@ V HashMap<K, V>::get(K key) {
 
 template<class K, class V>
 void HashMap<K, V>::put(K key, V value) {
-//    int hashCode = (key % MAP_SIZE);
     int hash = hashCode(key);
     auto *newEntry = new HashEntry<K, V>(key, value, nullptr);
     if (map[hash] == nullptr) {
@@ -76,7 +75,6 @@ void HashMap<K, V>::put(K key, V value) {
 
 template<class K, class V>
 bool HashMap<K, V>::remove(K key) {
-//    int hashCode = (key % MAP_SIZE);
     int hash = hashCode(key);
     if (map[hash] == nullptr) {
         return false;
@@ -108,7 +106,8 @@ void HashMap<K, V>::display() {
             HashEntry<K, V> *entry = map[i];
             std::cout << "Bucket " << i << ": ";
             while (entry != nullptr) {
-                std::cout << "(" << entry->getKey() << " , " << entry->getValue() << ")";
+                // in format - Bucket 0: (key, value) -> (key, value) -> (key, value)
+                std::cout << "(" << entry->getKey() << " , " << entry->getValue().outputSequence() << ")";
                 entry = entry->getNext();
                 if (entry != nullptr) {
                     std::cout << " -> ";

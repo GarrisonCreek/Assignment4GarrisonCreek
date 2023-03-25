@@ -1,8 +1,7 @@
 #include <iostream>
-#include "HashMap/HashMap.h"
 #include "HashMap/HashMap.cpp"
 #include "HashEntry/HashEntry.cpp"
-#include "Sequence/Sequence.hpp"      // TODO: fix these two include lines
+#include "Sequence/Sequence.h"
 
 using namespace std; // TODO: remove this line
 
@@ -14,26 +13,32 @@ void outputFile(){ // outputs the map to a file
 }
 
 int main() {
-    HashMap<int, int> hm;
-    hm.put(3, 23);
-    hm.put(5, 100);
-    hm.put(2, 200);
-    hm.put(10, 300);
-    cout << "Value of key = 5, is " << hm.get(5) << endl;
-//    hm.put(x, y);
-//    cout << "override an existing entry of (3, 23) with (3,123)" << endl;
-//    hm.put(x, y);
-//    cout << "New value of key = 3, is " << hm.get(x) << endl;
+    HashMap<int, Sequence<int>> hm = HashMap<int, Sequence<int>>();
 
-    HashMap<string, string> hm2;
-    hm2.put("a", "Hello");
-    hm2.put("two", "World");
-    hm2.put("three", "!");
-    hm2.put("pie", "Haha I overrode you");
-    hm2.put("zzz", "Im sharing this bucket with 3");
-//    hm2.remove(5);
-    cout << "Value of key = 5, is " << hm2.get("zzz") << endl;
-    hm2.display();
+    auto s1 = Sequence<int>();
+    int x = 1;
+    s1.add(x, s1.length());
+    x = 2;
+    s1.add(x, s1.length());
+    x = 3;
+    s1.add(x, s1.length());
+
+    auto s2 = Sequence<int>();
+    x = 4;
+    s2.add(x, s2.length());
+    x = 5;
+    s2.add(x, s2.length());
+    x = 6;
+    s2.add(x, s2.length());
+
+    hm.put(1, s1);
+    hm.put(5, s2);
+    hm.put(101, s2);
+    hm.put(201, s2);
+    s1.add(x, s1.length());
+    hm.put(2, s1);
+
+    hm.display();
 
     return 0;
 }

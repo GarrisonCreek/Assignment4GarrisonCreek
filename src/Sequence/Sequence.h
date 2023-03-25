@@ -16,6 +16,8 @@ private: // Internal Representation
     public:
         T value;
         NodeRecord *next;
+
+        NodeRecord() : value(T()), next(nullptr) {}
     };
 
     NodeRecord *head;
@@ -29,21 +31,21 @@ public:
     void clear(void);
 
     //implement the following four functions
-    void add(T &x, int pos);
+    void add(const T &x, int pos);
     //! updates self
     //! restores pos
     //! clears x
     //! requires: 0 ≤ pos ≤ |self|
     //! ensures: self = #self[0, pos) * <#x> * #self[pos, |#self|)
 
-    void remove(T &x, int pos);
+    void remove(const T &x, int pos);
     //! updates self
     //! restores pos //! replaces x
     //!requires: 0 ≤ pos < |self|
     //!ensures: <x> = #self[pos, pos+1) and
     //!        self = #self[0, pos) * #self[pos+1, |#self|)
 
-    void entry(T &x, int pos);
+    void entry(const T &x, int pos);
     //! restores self, pos
     //! replaces x
     //! requires: 0 ≤ pos < |self|
@@ -53,7 +55,7 @@ public:
     //! restores self
     //! ensures: length = |self|
 
-    void outputSequence(void);
+    std::string outputSequence(void);
     //! restores self
     //! ensures: self = #self
 

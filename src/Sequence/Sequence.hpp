@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cstdio>
 #include "Sequence.h"
+#include <sstream>
 
 using namespace std;
 
@@ -19,32 +20,33 @@ Sequence<T>::Sequence() {
 
 template<class T>
 Sequence<T>::~Sequence() {
-    reclaimAllNodes(head);
+//    reclaimAllNodes(head);
+    clear();
 }// ~Sequence
 
 
 template<class T>
 void Sequence<T>::clear(void) {
-    reclaimAllNodes(head);
+//    reclaimAllNodes(head);
     head = NULL;
     size = 0;
 }// clear
 
-template<class T>
-void Sequence<T>::reclaimAllNodes(NodeRecord *&initialP)
-// requires: Null(initialP)  or  Alive(initialP)
-//  ensures: all nodes in linked list
-//           beginning with initialP are reclaimed
-{
-    if (initialP != NULL) {
-        reclaimAllNodes(initialP->next);
-        delete (initialP);
-    }// end if
-}// reclaimAllNodes
+//template<class T>
+//void Sequence<T>::reclaimAllNodes(NodeRecord *&initialP)
+//// requires: Null(initialP)  or  Alive(initialP)
+////  ensures: all nodes in linked list
+////           beginning with initialP are reclaimed
+//{
+//    if (initialP != NULL) {
+//        reclaimAllNodes(initialP->next);
+//        delete (initialP);
+//    }// end if
+//}// reclaimAllNodes
 
 
 template<class T>
-void Sequence<T>::add(T &x, int pos) {
+void Sequence<T>::add(const T &x, int pos) {
     auto *NewRec = new NodeRecord;
     auto *temp = new NodeRecord;
     NewRec->value = x;
@@ -59,14 +61,14 @@ void Sequence<T>::add(T &x, int pos) {
         for (int i = 0; i < size - 1; i++) {
             temp = temp->next;
         }
-        NewRec->next = temp->next;
         temp->next = NewRec;
         size++;
     }
 }
 
+
 template<class T>
-void Sequence<T>::remove(T &x, int pos) {
+void Sequence<T>::remove(const T &x, int pos) {
 
     NodeRecord *temp;
     temp = head;
@@ -85,7 +87,7 @@ void Sequence<T>::remove(T &x, int pos) {
 }
 
 template<class T>
-void Sequence<T>::entry(T &x, int pos) {
+void Sequence<T>::entry(const T &x, int pos) {
 
     auto *temp = new NodeRecord;
     temp = head;
@@ -107,21 +109,21 @@ int Sequence<T>::length() {
 }
 
 template<class T>
-void Sequence<T>::outputSequence() {
-    NodeRecord *temp;
-    temp = head;
-
-    if (size == 0) {
-        cout << "<>";
-    } else {
-        cout << "<";
-        while (temp->next != NULL) {
-            cout << temp->value << ", ";
-            temp = temp->next;
+std::string Sequence<T>::outputSequence() {
+    std::stringstream ss;
+    NodeRecord *p = head;
+    ss << "[";
+    while (p != nullptr) {
+        ss << p->value;
+        if (p->next != nullptr) {
+            ss << ", ";
         }
-        cout << temp->value << ">";
+        p = p->next;
     }
+    ss << "]";
+    return ss.str();
 }
+
 
 template<class T>
 void Sequence<T>::transferFrom(Sequence<T> &source) {

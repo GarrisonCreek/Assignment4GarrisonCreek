@@ -13,12 +13,17 @@ private:
     HashEntry<K,V> **map;
 
 public:
-    const int MAP_SIZE = 128; // TODO: Change this completely
+    const int MAP_SIZE = 100;
 
     HashMap();
 
     ~HashMap();
 
+    /**
+     * Description: Returns the value of the key
+     * @param key
+     * @return
+     */
     V get(K key);
 
     void put(K key, V value);
