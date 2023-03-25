@@ -22,7 +22,7 @@ void doInputPersonDataFromFile(EmployeeSequence &personData) {
         cout << "Unable to open file";
         exit(1); // terminate with error
     }
-    //input.openFile(filename, File::openForRead, successful);
+//    input.openFile(filename, File::openForRead, successful);
     if (infile.is_open()) {
         // The first item in the data file is an integer
         // it represents how many records are in the data file.
