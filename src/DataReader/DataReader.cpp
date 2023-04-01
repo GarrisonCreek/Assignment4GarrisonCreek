@@ -5,15 +5,12 @@
 #include "DataReader.h"
 
 #include <iostream>
-#include "../Sequence/Sequence.h"
 #include "../HashMap/HashMap.cpp"
 #include "../HashEntry/HashEntry.cpp"
-#include "../AirportRecord/AirportRecord.h"
 
 #include <fstream>
 using std::ifstream;
 #include <cstdlib>
-
 
 HashMap<string, AirportRecord> DataReader::inputAirportDataFromFile(const std::string &filename) { // creates map from a file
     ifstream file;
@@ -49,7 +46,19 @@ HashMap<string, AirportRecord> DataReader::inputAirportDataFromFile(const std::s
     return hm;
 }
 
+void DataReader::outputFile(std::string &filename, HashMap<std::string, AirportRecord> hm) {
+    ofstream file;
+    file.open(filename);
+    if (file.is_open()) {
+        auto printer = hm.display();
+        file << hm.display();
 
-void outputFile() { // outputs the map to a file
+
+
+        file.close();
+    } else {
+        cout << "Unable to open file";
+        exit(1); // terminate with error
+    }
 
 }

@@ -100,22 +100,24 @@ bool HashMap<K, V>::remove(K key) {
 }
 
 template<class K, class V>
-void HashMap<K, V>::display() {
+std::string HashMap<K, V>::display() {
+    std::stringstream ss;
     for (int i = 0; i < MAP_SIZE; i++) {
         if (map[i] != nullptr) {
             HashEntry<K, V> *entry = map[i];
-            std::cout << "Bucket " << i << ": ";
+            ss << "Bucket " << i << ": ";
             while (entry != nullptr) {
                 // in format - Bucket 0: (key, value) -> (key, value) -> (key, value)
-                std::cout << "(key = " << entry->getKey() << ", value = " << entry->getValue().output() << ")";
+                ss << "(key = " << entry->getKey() << ", value = " << entry->getValue().output() << ")";
                 entry = entry->getNext();
                 if (entry != nullptr) {
-                    std::cout << " -> ";
+                    ss << " -> ";
                 }
             }
-            std::cout << std::endl;
+            ss << std::endl;
         }
     }
+    return ss.str();
 }
 
 template<class K, class V>

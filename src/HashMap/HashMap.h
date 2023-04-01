@@ -10,7 +10,7 @@
 template<class K, class V>
 class HashMap {
 private:
-    HashEntry<K,V> **map;
+    HashEntry<K, V> **map;
 
 public:
     const int MAP_SIZE = 128;
@@ -32,7 +32,7 @@ public:
 
     bool remove(K key);
 
-    void display();
+    std::string display();
 
     int hashCode(K key);
 
