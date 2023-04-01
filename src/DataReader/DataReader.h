@@ -7,12 +7,14 @@
 
 
 #include <string>
+#include "../AirportRecord/AirportRecord.h"
+#include "../HashMap/HashMap.h"
 
 class DataReader {
 private:
 
 public:
-    static void inputFile(const std::string& file); // creates map from a file
+    HashMap<std::string, AirportRecord> inputAirportDataFromFile(const std::string& file); // creates map from a file
     void outputFile(); // outputs the map to a file
 
 };

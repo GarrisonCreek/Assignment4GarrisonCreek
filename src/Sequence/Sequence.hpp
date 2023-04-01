@@ -109,7 +109,7 @@ int Sequence<T>::length() {
 }
 
 template<class T>
-std::string Sequence<T>::outputSequence() {
+std::string Sequence<T>::output() {
     std::stringstream ss;
     NodeRecord *p = head;
     ss << "[";

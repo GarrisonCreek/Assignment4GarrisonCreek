@@ -13,7 +13,7 @@ private:
     HashEntry<K,V> **map;
 
 public:
-    const int MAP_SIZE = 100;
+    const int MAP_SIZE = 128;
 
     HashMap();
 

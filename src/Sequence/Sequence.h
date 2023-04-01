@@ -55,7 +55,7 @@ public:
     //! restores self
     //! ensures: length = |self|
 
-    std::string outputSequence(void);
+    std::string output(void);
     //! restores self
     //! ensures: self = #self
 

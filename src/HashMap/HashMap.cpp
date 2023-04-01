@@ -107,7 +107,7 @@ void HashMap<K, V>::display() {
             std::cout << "Bucket " << i << ": ";
             while (entry != nullptr) {
                 // in format - Bucket 0: (key, value) -> (key, value) -> (key, value)
-                std::cout << "(key = " << entry->getKey() << ", value = " << entry->getValue().outputSequence() << ")";
+                std::cout << "(key = " << entry->getKey() << ", value = " << entry->getValue().output() << ")";
                 entry = entry->getNext();
                 if (entry != nullptr) {
                     std::cout << " -> ";
