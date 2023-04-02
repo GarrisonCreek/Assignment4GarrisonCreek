@@ -27,7 +27,9 @@ public:
 
     AirportRecord() {}
 
-    ~AirportRecord() {}
+    ~AirportRecord() {
+        clear();
+    }
 
 void clear(void) {
         code = "";

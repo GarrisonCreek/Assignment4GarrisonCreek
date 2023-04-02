@@ -11,6 +11,7 @@ template<class K, class V>
 class HashMap {
 private:
     HashEntry<K, V> **map;
+    int size = 0;
 
 public:
     const int MAP_SIZE = 128;
@@ -36,6 +37,9 @@ public:
 
     int hashCode(K key);
 
+    int getSize();
+
+    bool containsKey(K key);
 };
 
 #endif //ASSIGNMENT4GARRISONCREEK_HASHMAP_H

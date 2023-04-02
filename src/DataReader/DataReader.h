@@ -15,7 +15,7 @@ private:
 
 public:
     static HashMap<std::string, AirportRecord> inputAirportDataFromFile(const std::string& filename); // creates map from a file
-    static void outputFile(std::string& filename, HashMap<std::string, AirportRecord> hm); // outputs the map to a file
+    static void outputFile(std::string& filename, HashMap<std::string, AirportRecord> &hm); // outputs the map to a file
 
 };
 

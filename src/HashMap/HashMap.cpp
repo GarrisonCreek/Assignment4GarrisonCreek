@@ -12,18 +12,23 @@ HashMap<K, V>::HashMap() {
     for (int i = 0; i < MAP_SIZE; i++) {
         map[i] = nullptr;
     }
+    size;
 }
 
 template<class K, class V>
 HashMap<K, V>::~HashMap() {
     for (int i = 0; i < MAP_SIZE; i++) {
-        HashEntry<K, V> *entry = map[i];
-        while (entry != nullptr) {
-            HashEntry<K, V> *prev = entry;
-            entry = entry->getNext();
-            delete prev;
+        if (map[i] != nullptr) {
+            HashEntry<K, V> *prevEntry = nullptr;
+            HashEntry<K, V> *entry = map[i];
+            while (entry != nullptr) {
+                prevEntry = entry;
+                entry = entry->getNext();
+                delete prevEntry;
+            }
         }
     }
+    size;
     delete[] map;
 }
 
@@ -31,7 +36,7 @@ template<class K, class V>
 V HashMap<K, V>::get(K key) {
     int hash = hashCode(key);
     if (map[hash] == nullptr) {
-        return V();
+        return nullptr;
     } else {
         HashEntry<K, V> *temp = map[hash];
         while (temp != nullptr) {
@@ -40,7 +45,24 @@ V HashMap<K, V>::get(K key) {
             }
             temp = temp->getNext();
         }
-        return V();
+        return nullptr;
+    }
+}
+
+template<class K, class V>
+bool HashMap<K, V>::containsKey(K key) {
+    int hash = hashCode(key);
+    if (map[hash] == nullptr) {
+        return false;
+    } else {
+        HashEntry<K, V> *temp = map[hash];
+        while (temp != nullptr) {
+            if (temp->getKey() == key) {
+                return true;
+            }
+            temp = temp->getNext();
+        }
+        return false;
     }
 }
 
@@ -50,10 +72,10 @@ void HashMap<K, V>::put(K key, V value) {
     auto *newEntry = new HashEntry<K, V>(key, value, nullptr);
     if (map[hash] == nullptr) {
         map[hash] = newEntry;
+        size++;
     } else {
         HashEntry<K, V> *previous = nullptr;
         HashEntry<K, V> *current = map[hash];
-
         while (current != nullptr) {
             if (current->getKey() == key) {
                 if (previous == nullptr) {
@@ -70,8 +92,10 @@ void HashMap<K, V>::put(K key, V value) {
             current = current->getNext();
         }
         previous->getNext() = newEntry;
+        size++;
     }
 }
+
 
 template<class K, class V>
 bool HashMap<K, V>::remove(K key) {
@@ -81,14 +105,15 @@ bool HashMap<K, V>::remove(K key) {
     } else {
         HashEntry<K, V> *previous = nullptr;
         HashEntry<K, V> *current = map[hash];
-
         while (current != nullptr) {
             if (current->getKey() == key) {
                 if (previous == nullptr) {
                     map[hash] = map[hash]->getNext();
+                    size--;
                     return true;
                 } else {
                     previous->getNext() = current->getNext();
+                    size--;
                     return true;
                 }
             }
@@ -97,6 +122,11 @@ bool HashMap<K, V>::remove(K key) {
         }
         return false;
     }
+}
+
+template<class K, class V>
+int HashMap<K, V>::getSize() {
+    return size;
 }
 
 template<class K, class V>

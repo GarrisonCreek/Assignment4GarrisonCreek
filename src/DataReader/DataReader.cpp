@@ -21,7 +21,6 @@ HashMap<string, AirportRecord> DataReader::inputAirportDataFromFile(const std::s
     HashMap<string, AirportRecord> hm = HashMap<string, AirportRecord>();
     if (file.is_open()) {
         file >> dataSize;
-        std::cout << "dataSize: " << dataSize << std::endl;
         for (int i = 0; i < dataSize; i++) {
             file >> ar.code;
             file >> ar.name;
@@ -46,19 +45,15 @@ HashMap<string, AirportRecord> DataReader::inputAirportDataFromFile(const std::s
     return hm;
 }
 
-void DataReader::outputFile(std::string &filename, HashMap<std::string, AirportRecord> hm) {
+void DataReader::outputFile(std::string &filename, HashMap<std::string, AirportRecord> &hm) {
     ofstream file;
     file.open(filename);
     if (file.is_open()) {
         auto printer = hm.display();
         file << hm.display();
-
-
-
         file.close();
     } else {
         cout << "Unable to open file";
         exit(1); // terminate with error
     }
-
 }
